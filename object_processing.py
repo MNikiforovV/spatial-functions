@@ -60,7 +60,8 @@ def read_geojson(filename, write_back=True):
         coordinates = p["geometry"]["coordinates"][0][0]
         
         #result = fix_rect(coordinates)
-        result = detect_shape(coordinates)
+        coordinates.pop()
+        result = detect_shape(coordinates, 0.05)
         
         if write_back: p["geometry"]["coordinates"][0][0] = result.copy()
 
@@ -71,4 +72,4 @@ def read_geojson(filename, write_back=True):
     return result
 
             
-print(read_geojson("examples/test3.geojson", False))
+print(read_geojson("examples/test2.geojson", False))
